@@ -3,6 +3,7 @@ import * as API from '../utils/api';
 export const ADD_DECK = 'ADD_DECK';
 export const ADD_CARD = 'ADD_CARD';
 export const LOAD_DECKS = 'LOAD_DECKS';
+export const LOAD_CARDS = 'LOAD_CARDS';
 
 export function addDeck(deck) {
   return {
@@ -25,6 +26,13 @@ export function loadDecks(decks) {
   };
 }
 
+export function loadCards(cards) {
+  return {
+    type: LOAD_CARDS,
+    cards,
+  };
+}
+
 export function handleAddDeck(deck) {
   return async dispatch => {
     const added = await API.addDeck(deck);
@@ -39,9 +47,11 @@ export function handleAddCard(card) {
   }
 }
 
-export function handleLoadDecks() {
+export function loadInitialData() {
   return async dispatch => {
     const decks = await API.getAllDecks();
+    const cards = await API.getAllCards();
     dispatch(loadDecks(decks));
+    dispatch(loadCards(cards));
   }
 }

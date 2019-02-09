@@ -1,4 +1,4 @@
-import { ADD_CARD } from '../actions';
+import { ADD_CARD, LOAD_CARDS } from '../actions';
 
 export default function cards (state = {}, action) {
   switch(action.type) {
@@ -6,6 +6,11 @@ export default function cards (state = {}, action) {
       return {
         ...state,
         [action.card.id]: action.card,
+      };
+    case LOAD_CARDS:
+      return {
+        ...state,
+        ...action.cards,
       };
     default:
       return state;
