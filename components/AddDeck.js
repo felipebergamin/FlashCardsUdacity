@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   Text,
   TextInput,
@@ -8,12 +9,23 @@ import {
   View,
 } from 'react-native';
 
+import { handleAddDeck } from '../actions';
+
 class AddDeck extends Component {
   state = {
     title: null,
   }
 
-  submit = () => alert(this.state.title);
+  submit = () => {
+    const deck = {
+      id: Date.now(),
+      title: this.state.title,
+    };
+
+    this.props.addDeck(deck);
+    // voltar para a tela anterior em vez de apenas zerar o form
+    this.reset();
+  }
 
   reset = () => {
     this.setState({ title: null });
@@ -98,4 +110,11 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddDeck;
+function mapDispatchToProps(dispatch, { navigation }) {
+  return {
+    addDeck: deck => dispatch(handleAddDeck(deck)),
+    goBack: () => navigation.goBack(),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(AddDeck);
