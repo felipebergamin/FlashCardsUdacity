@@ -45,3 +45,7 @@ export async function addCard(card) {
     return null;
   }
 }
+
+export async function getAllCards() {
+  return JSON.parse(await AsyncStorage.getItem(storageKeys.CARDS));
+}
