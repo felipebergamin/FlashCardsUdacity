@@ -6,6 +6,8 @@ function DeckView(props) {
   const { deck, cards } = props;
   const hasCards = cards && cards.length > 0;
 
+  goToAddCard = deck => props.navigation.navigate('AddCard', { deck });
+
   return (
     <View style={styles.container}>
       <Text style={styles.deckTitle}>
@@ -21,7 +23,7 @@ function DeckView(props) {
           Iniciar Quiz
         </Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() => goToAddCard(deck)}>
         <Text style={styles.buttonText}>
           Nova Carta
         </Text>
