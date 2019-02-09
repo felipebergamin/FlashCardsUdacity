@@ -5,11 +5,12 @@ import { createStore } from 'redux';
 
 import AddDeck from './components/AddDeck';
 import reducers from './reducers';
+import middlewares from './middlewares';
 
 export default class App extends React.Component {
   render() {
     return (
-      <Provider store={createStore(reducers)}>
+      <Provider store={createStore(reducers, middlewares)}>
         <View style={{ flex: 1 }}>
           <AddDeck />
         </View>
