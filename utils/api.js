@@ -14,10 +14,10 @@ export async function addDeck(deck) {
     };
 
     await AsyncStorage.setItem(storageKeys.DECKS, JSON.stringify(decks));
-    return true;
+    return deck;
   } catch (err) {
     console.error(err);
-    return false;
+    return null;
   }
 }
 
@@ -39,9 +39,9 @@ export async function addCard(card) {
     };
 
     await AsyncStorage.setItem(storageKeys.CARDS, JSON.stringify(cards));
-    return true;
+    return card;
   } catch (err) {
     console.error(err);
-    return false;
+    return null;
   }
 }
