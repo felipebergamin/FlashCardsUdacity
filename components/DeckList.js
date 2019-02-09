@@ -8,11 +8,15 @@ class DeckList extends Component {
     this.props.loadData();
   }
 
+  goToDeckView = deckId => {
+    this.props.navigation.navigate('DeckView', { deckId });
+  }
+
   renderItem = ({ item: itemId }) => {
     const { decks, cards } = this.props;
     
     return (
-      <TouchableOpacity style={styles.deckItem}>
+      <TouchableOpacity style={styles.deckItem} onPress={() => this.goToDeckView(itemId)}>
         <Text style={[styles.centerText, styles.deckTitle]}>{decks[itemId].title}</Text>
         <Text style={[styles.centerText]}>{Object.keys(cards).filter(key => cards[key].deck === itemId).length} cards</Text>
       </TouchableOpacity>

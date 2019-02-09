@@ -8,6 +8,7 @@ import AddDeck from './components/AddDeck';
 import reducers from './reducers';
 import middlewares from './middlewares';
 import DeckList from './components/DeckList';
+import DeckView from './components/DeckView';
 
 const StackNavigator = createAppContainer(
   createStackNavigator({
@@ -19,6 +20,12 @@ const StackNavigator = createAppContainer(
     },
     AddDeck: {
       screen: AddDeck,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    DeckView: {
+      screen: DeckView,
       navigationOptions: {
         header: null,
       },
