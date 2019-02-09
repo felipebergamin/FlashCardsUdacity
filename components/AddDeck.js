@@ -27,10 +27,12 @@ class AddDeck extends Component {
     this.reset();
   }
 
+  cancel = () => {
+    this.props.goBack();
+  }
+
   reset = () => {
     this.setState({ title: null });
-
-    // route to deck list
   }
 
   render() {
@@ -53,7 +55,7 @@ class AddDeck extends Component {
           value={title}/>
 
         <View style={{ flexDirection: 'row' }}>
-          <TouchableOpacity style={styles.cancelBtn} onPress={this.reset}>
+          <TouchableOpacity style={styles.cancelBtn} onPress={this.cancel}>
             <Text style={styles.btnText}>Cancelar</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.sbmtBtn} onPress={this.submit}>
