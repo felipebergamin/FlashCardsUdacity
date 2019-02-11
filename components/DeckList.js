@@ -22,7 +22,7 @@ class DeckList extends Component {
     return (
       <TouchableOpacity style={styles.deckItem} onPress={() => this.goToDeckView(itemId)}>
         <Text style={[styles.centerText, styles.deckTitle]}>{decks[itemId].title}</Text>
-        <Text style={[styles.centerText]}>{Object.keys(cards).filter(key => cards[key].deck === itemId).length} cards</Text>
+        <Text style={[styles.centerText]}>{Object.keys(cards).filter(key => cards[key].deckId == itemId).length} cards</Text>
       </TouchableOpacity>
     )
   }
