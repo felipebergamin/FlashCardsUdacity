@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { StackActions, NavigationActions } from 'react-navigation';
 import {
   Text,
   TextInput,
@@ -23,8 +24,13 @@ class AddDeck extends Component {
     };
 
     this.props.addDeck(deck);
-    // voltar para a tela anterior em vez de apenas zerar o form
-    this.reset();
+    const routeReplace = StackActions.replace({
+      key: this.props.navigation.state.key,
+      routeName: 'DeckView',
+      params: { deckId: deck.id },
+      action: NavigationActions.navigate({ routeName: 'DeckView', params: { deckId: deck.id } })
+    });
+    this.props.navigation.dispatch(routeReplace);
   }
 
   cancel = () => {
