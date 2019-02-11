@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { setLocalNotification, clearLocalNotifications } from '../utils/helpers';
 import {
   ActivityIndicator,
   View,
@@ -73,6 +74,8 @@ class QuizComponent extends Component {
 
   endQuiz = () => {
     this.setState({ quizStatus: 'completed' });
+    clearLocalNotifications()
+      .then(setLocalNotification);
   }
 
   leaveQuiz = () => {

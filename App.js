@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, StatusBar } from 'react-native';
-import { Constants } from 'expo';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
@@ -12,6 +11,7 @@ import DeckList from './components/DeckList';
 import DeckView from './components/DeckView';
 import AddCard from './components/AddCard';
 import QuizComponent from './components/QuizComponent';
+import { setLocalNotification } from './utils/helpers';
 
 const StackNavigator = createAppContainer(
   createStackNavigator({
@@ -49,6 +49,10 @@ const StackNavigator = createAppContainer(
 );
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
+
   render() {
     return (
       <Provider store={createStore(reducers, middlewares)}>
