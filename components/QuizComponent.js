@@ -15,6 +15,7 @@ class QuizComponent extends Component {
     incorrectAnswers: 0,
     deck: null,
     cards: null,
+    usedCards: [],
     currentCard: null,
     showAnswer: false,
   }
@@ -33,9 +34,17 @@ class QuizComponent extends Component {
   }
 
   nextCard = () => {
-    const [currentCard, ...cards] = this.state.cards;
-    this.setState({ currentCard, cards });
-    return currentCard;
+    const [newCard, ...cards] = this.state.cards;
+    this.setState(({currentCard, usedCards}) => ({
+      cards,
+      currentCard: newCard,
+      usedCards: [
+        currentCard,
+        ...usedCards,
+      ],
+    }));
+    
+    if (!newCard) this.endQuiz();
   }
 
   showAnswer = () => this.setState({ showAnswer: true });
@@ -49,10 +58,7 @@ class QuizComponent extends Component {
       ToastAndroid.BOTTOM,
     );
     this.setState(({ correctAnswers }) => ({ correctAnswers: ++correctAnswers, showAnswer: false }));
-
-    this.state.cards.length === 0
-      ? this.endQuiz()
-      : this.nextCard();
+    this.nextCard();
   }
 
   incorrectAnswer = () => {
@@ -62,10 +68,7 @@ class QuizComponent extends Component {
       ToastAndroid.BOTTOM,
     );
     this.setState(({ incorrectAnswers }) => ({ incorrectAnswers: ++incorrectAnswers, showAnswer: false }));
-    
-    this.state.cards.length === 0
-      ? this.endQuiz()
-      : this.nextCard();
+    this.nextCard();
   }
 
   endQuiz = () => {
@@ -74,6 +77,21 @@ class QuizComponent extends Component {
 
   leaveQuiz = () => {
     this.props.navigation.goBack();
+  }
+
+  restartQuiz = () => {
+    this.setState(({usedCards}) => {
+      const [firstCard, ...cards] = usedCards;
+
+      return {
+        cards,
+        usedCards: [],
+        quizStatus: 'running',
+        correctAnswers: 0,
+        incorrectAnswers: 0,
+        currentCard: firstCard,
+      };
+    })
   }
 
   render() {
@@ -141,8 +159,12 @@ class QuizComponent extends Component {
           Você acertou {(correctAnswers / (correctAnswers + incorrectAnswers) * 100).toFixed(1)}% das perguntas!
         </Text>
 
+        <TouchableOpacity onPress={this.restartQuiz} style={[styles.button, styles.secondaryButton]}>
+          <Text style={[styles.buttonText]}>Recomeçar</Text>
+        </TouchableOpacity>
+
         <TouchableOpacity onPress={this.leaveQuiz} style={[styles.button, styles.secondaryButton]}>
-          <Text style={[styles.buttonText]}>Voltar</Text>
+          <Text style={[styles.buttonText]}>Sair</Text>
         </TouchableOpacity>
       </View>
     )

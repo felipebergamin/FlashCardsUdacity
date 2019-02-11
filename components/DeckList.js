@@ -30,7 +30,6 @@ class DeckList extends Component {
   render() {
     const { decks } = this.props;
 
-    console.log(decks);
     return (
       <View style={styles.container}>
         {decks && Object.keys(decks).length > 0
