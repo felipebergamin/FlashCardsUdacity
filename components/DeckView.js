@@ -8,6 +8,10 @@ function DeckView(props) {
 
   goToAddCard = deck => props.navigation.navigate('AddCard', { deck });
 
+  startQuiz = () => {
+    props.navigation.navigate('Quiz', { deck, cards });
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.deckTitle}>
@@ -18,7 +22,7 @@ function DeckView(props) {
         {cards.length} cartas
       </Text>
 
-      <TouchableOpacity style={styles.button} disabled={!hasCards}>
+      <TouchableOpacity style={styles.button} disabled={!hasCards} onPress={this.startQuiz}>
         <Text style={[styles.buttonText, (hasCards ? {} : styles.disabledButtonText)]}>
           Iniciar Quiz
         </Text>
