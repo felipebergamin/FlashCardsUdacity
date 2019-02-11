@@ -31,6 +31,8 @@ class DeckList extends Component {
     return (
       <View style={styles.container}>
         <FlatList
+          style={{ width: '100%' }}
+          showsVerticalScrollIndicator={false}
           data={Object.keys(this.props.decks)}
           keyExtractor={(item) => item}
           renderItem={this.renderItem} />
