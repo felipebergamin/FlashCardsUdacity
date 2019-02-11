@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 
 function DeckView(props) {
@@ -12,6 +12,13 @@ function DeckView(props) {
     props.navigation.navigate('Quiz', { deck, cards });
   }
 
+  if (!props.deck) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator />
+      </View>
+    )
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.deckTitle}>
