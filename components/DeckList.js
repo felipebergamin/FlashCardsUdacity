@@ -28,14 +28,23 @@ class DeckList extends Component {
   }
 
   render() {
+    const { decks } = this.props;
+
+    console.log(decks);
     return (
       <View style={styles.container}>
-        <FlatList
-          style={{ width: '100%' }}
-          showsVerticalScrollIndicator={false}
-          data={Object.keys(this.props.decks)}
-          keyExtractor={(item) => item}
-          renderItem={this.renderItem} />
+        {decks && Object.keys(decks).length > 0
+          ? <FlatList
+              style={{ width: '100%' }}
+              showsVerticalScrollIndicator={false}
+              data={Object.keys(this.props.decks)}
+              keyExtractor={(item) => item}
+              renderItem={this.renderItem} />
+          : <View style={[styles.container, { flex: 2 }]}>
+              <Text style={{fontSize: 20}}>
+                Você não tem nenhum baralho! 😱
+              </Text>
+            </View>}
 
         <TouchableOpacity style={styles.newDeckButton} onPress={this.newDeck}>
           <Text style={styles.newDeckButtonText}>Novo Baralho</Text>

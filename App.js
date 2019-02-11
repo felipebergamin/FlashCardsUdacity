@@ -1,5 +1,6 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, StatusBar } from 'react-native';
+import { Constants } from 'expo';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
@@ -52,6 +53,10 @@ export default class App extends React.Component {
     return (
       <Provider store={createStore(reducers, middlewares)}>
         <View style={{ flex: 1 }}>
+          <View>
+            <StatusBar barStyle='default' hidden={true} />
+          </View>
+
           <StackNavigator />
         </View>
       </Provider>
