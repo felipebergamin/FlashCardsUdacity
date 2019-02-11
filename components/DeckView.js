@@ -69,7 +69,7 @@ function mapStateToProps({ decks, cards }, { navigation }) {
 
   return {
     deck: decks[deckId],
-    cards: Object.keys(cards).map(key => cards[key]).filter(card => card.deck === deckId),
+    cards: Object.keys(cards).map(key => cards[key]).filter(card => card.deckId == deckId),
   }
 }
 
