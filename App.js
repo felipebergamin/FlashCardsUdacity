@@ -10,6 +10,7 @@ import middlewares from './middlewares';
 import DeckList from './components/DeckList';
 import DeckView from './components/DeckView';
 import AddCard from './components/AddCard';
+import QuizComponent from './components/QuizComponent';
 
 const StackNavigator = createAppContainer(
   createStackNavigator({
@@ -33,6 +34,12 @@ const StackNavigator = createAppContainer(
     },
     AddCard: {
       screen: AddCard,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    Quiz: {
+      screen: QuizComponent,
       navigationOptions: {
         header: null,
       },
