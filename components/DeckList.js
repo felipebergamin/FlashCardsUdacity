@@ -12,9 +12,13 @@ class DeckList extends Component {
     this.props.navigation.navigate('DeckView', { deckId });
   }
 
+  newDeck = () => {
+    this.props.navigation.navigate('AddDeck');
+  }
+
   renderItem = ({ item: itemId }) => {
     const { decks, cards } = this.props;
-    
+
     return (
       <TouchableOpacity style={styles.deckItem} onPress={() => this.goToDeckView(itemId)}>
         <Text style={[styles.centerText, styles.deckTitle]}>{decks[itemId].title}</Text>
@@ -22,7 +26,7 @@ class DeckList extends Component {
       </TouchableOpacity>
     )
   }
-  
+
   render() {
     return (
       <View style={styles.container}>
@@ -30,6 +34,10 @@ class DeckList extends Component {
           data={Object.keys(this.props.decks)}
           keyExtractor={(item) => item}
           renderItem={this.renderItem} />
+
+        <TouchableOpacity style={styles.newDeckButton} onPress={this.newDeck}>
+          <Text style={styles.newDeckButtonText}>Novo Baralho</Text>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -50,6 +58,13 @@ const styles = StyleSheet.create({
   deckItem: {
     height: 100,
     justifyContent: 'center',
+  },
+  newDeckButton: {
+    padding: 20,
+    paddingBottom: 40,
+  },
+  newDeckButtonText: {
+    fontSize: 20,
   },
 });
 
